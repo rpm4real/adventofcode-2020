@@ -24,3 +24,10 @@ board_frame['seat_id'] = board_frame['row_val']*8 + board_frame['col_val']
 
 board_frame['seat_id'].max()
 # %%
+# part 2 
+board_frame = board_frame.sort_values(by='seat_id')
+board_frame['previous_seat'] = board_frame['seat_id'].shift(1)
+board_frame['next_seat'] = board_frame['seat_id'].shift(-1)
+
+board_frame[board_frame['seat_id']+1 != board_frame['next_seat']]
+# 636
