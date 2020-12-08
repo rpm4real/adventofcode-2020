@@ -27,3 +27,21 @@ def run_lines(program):
 run_lines(logic)
 
 # %%
+#part 2 
+
+def swap(command):
+    if 'jmp' in command: 
+        return command.replace('jmp','nop')
+    elif 'nop' in command:
+        return command.replace('nop','jmp')
+
+for k, line in enumerate(logic): 
+    if 'nop' in line or 'jmp' in line: 
+        new_logic = logic.copy()
+        new_logic[k] = swap(line)
+        acc, success = run_lines(new_logic)
+        if success: 
+            break
+print(acc)
+        
+
