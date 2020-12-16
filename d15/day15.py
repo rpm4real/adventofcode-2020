@@ -7,7 +7,7 @@ for num in input:
     turn_cnt += 1
     prev_num = num  
 
-while turn_cnt <= 2020: 
+while turn_cnt <= 2020: #part 2, 30000000 instead
     if prev_num in number_tracker: 
         new_num = turn_cnt - 1 - number_tracker[prev_num] 
     else: 
@@ -17,3 +17,5 @@ while turn_cnt <= 2020:
     prev_num = new_num 
 
 print(prev_num)
+
+
