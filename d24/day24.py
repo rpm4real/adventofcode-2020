@@ -51,3 +51,33 @@ for tile_line in tile_directions:
 # part 1 answer
 len(flip_list)
 # %%
+# part 2 - reusing old game of life code. 
+from collections import Counter 
+neighborhood = [
+    (1, -1, 0), 
+    (-1, 1, 0), 
+    (1, 0, -1), 
+    (-1, 0, 1), 
+    (0, 1, -1), 
+    (0, -1, 1)
+]
+
+initial_state = flip_list.copy()
+
+def shift_hex(cells, delta):
+    "shift hex tiles by a delta"
+    (dx, dy, dz) = delta
+    return {(x+dx, y+dy, z+dz) for (x, y, z) in cells}
+
+def sim_cycle(state, N):
+    "iterate cycle N times"
+    for g in range(N):
+        counts = Counter(n for c in state for n in shift_hex(neighborhood, c))
+        state = {c for c in counts 
+                #if (counts[c] == 2 and c not in state) or (counts[c] in (1,2) and c in state)}
+                if counts[c] == 2 or (counts[c] == 1 and c in state)}
+    return state 
+#%% 
+active_states = sim_cycle(initial_state, 100)
+len(active_states)
+# %%
